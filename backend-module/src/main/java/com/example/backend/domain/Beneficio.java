@@ -7,9 +7,9 @@ import java.util.Map;
 import java.util.Optional;
 
 @Entity
-@Table(name="BENEFICIO")
-
+@Table(name = "BENEFICIO")
 public class Beneficio implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,55 +24,38 @@ public class Beneficio implements Serializable {
     @MapKey(name = "metakey")
     private Map<String, BeneficioMeta> metadata = new HashMap<>();
 
-    public Optional<String> getMetaValue(String key){
-        return Optional.ofNullable(metadata.get(key)).map(BeneficioMeta::getMetavalue);
+    // --- MÉTODOS DE AJUDA ---
+
+    /**
+     * Busca o valor de um metadado.
+     */
+    public Optional<String> getMetaValue(String key) {
+        // Esta linha agora corresponde ao método em BeneficioMeta
+        return Optional.ofNullable(metadata.get(key)).map(BeneficioMeta::getMetaValue);
     }
 
-    public void setMetadata(String key, String value) {
-        BeneficioMeta meta= metadata.get(key);
-        if (meta != null){
-            meta.setMetavalue(value);
-        }
-        else {
+    /**
+     * Define ou atualiza o valor de um metadado. (Método duplicado removido)
+     */
+    public void setMetaValue(String key, String value) {
+        BeneficioMeta meta = metadata.get(key);
+        if (meta != null) {
+            // Esta linha agora corresponde ao método em BeneficioMeta
+            meta.setMetaValue(value);
+        } else {
             meta = new BeneficioMeta(this, key, value);
             metadata.put(key, meta);
         }
     }
 
-    public Long getId() {
-        return id;
-    }
+    // --- GETTERS E SETTERS PADRÃO ---
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public Long getVersion() {
-        return version;
-    }
-
-    public void setVersion(Long version) {
-        this.version = version;
-    }
-
-    public Map<String, BeneficioMeta> getMetadata() {
-        return metadata;
-    }
-
-    public void setMetadata(Map<String, BeneficioMeta> metadata) {
-        this.metadata = metadata;
-    }
-
-
-
-
-
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+    public String getNome() { return nome; }
+    public void setNome(String nome) { this.nome = nome; }
+    public Long getVersion() { return version; }
+    public void setVersion(Long version) { this.version = version; }
+    public Map<String, BeneficioMeta> getMetadata() { return metadata; }
+    public void setMetadata(Map<String, BeneficioMeta> metadata) { this.metadata = metadata; }
 }

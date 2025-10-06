@@ -51,7 +51,7 @@ public class BeneficioService {
         dto.setId(beneficio.getId());
         dto.setNome(beneficio.getNome());
         dto.setMetadata(beneficio.getMetadata().entrySet().stream()
-                .collect(Collectors.toMap(Map.Entry::getKey, e -> e.getValue().getMetavalue())));
+                .collect(Collectors.toMap(Map.Entry::getKey, e -> e.getValue().getMetaValue())));
         return dto;
     }
 
